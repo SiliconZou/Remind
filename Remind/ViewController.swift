@@ -15,16 +15,14 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor.blue
         
-        let notiCenter = UNUserNotificationCenter.current()
+//        SZNotiManager.shareNoti().SZNotificationWith(hour: 14, minute: 30, title: nil, alertBody: "tick tock", notiId: "PM")
         
-        notiCenter .requestAuthorization(options: [.alert,.badge,.sound]) { (granted, error) in
-            if granted == true {
-                self.SZNotificationWith(hour: 22, minute: 34, alertBody: "该洗白白了！")
-            } else {
-                print("用户禁止通知")
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+            
         }
         
+        SZNotiManager.shareNoti().SZNotificationWith(hour: 18, minute: 16, title: "dinner", alertBody: "time to dinner", notiId: "qwe")
+        SZNotiManager.shareNoti().SZNotificationWith(hour: 18, minute: 17, title: "training", alertBody: "time to run", notiId: "PM")
         
     }
 
@@ -32,44 +30,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func SZNotificationWith(hour:Int?, minute:Int?, alertBody:String?) {
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        
-        let notiCenter = UNUserNotificationCenter.current()
-        
-        let notiContent = UNMutableNotificationContent.init()
-        
-        notiContent.title = "小可爱请注意"
-        
-        if alertBody != nil {
-            notiContent.body = alertBody!
-        } else {
-            notiContent.body = ""
-        }
-        
-        notiContent.badge = 1
-        
-        notiContent.sound = UNNotificationSound.default()
-        
-        var compoents = DateComponents.init()
-        
-        compoents.timeZone = TimeZone.init(secondsFromGMT: 0)
-        
-        compoents.hour = hour!
-        
-        compoents.minute = minute
-        
-        let trigger = UNCalendarNotificationTrigger.init(dateMatching: compoents, repeats: true)
-        
-        let request = UNNotificationRequest.init(identifier: "notificationAM", content: notiContent, trigger: trigger)
-        
-        notiCenter .add(request) { (error) in
-            print(error.debugDescription)
-        }
-        
-    }
-
-
 }
 
