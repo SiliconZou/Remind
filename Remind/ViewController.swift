@@ -21,8 +21,12 @@ class ViewController: UIViewController {
             
         }
         
-        SZNotiManager.shareNoti().SZNotificationWith(hour: 18, minute: 16, title: "dinner", alertBody: "time to dinner", notiId: "qwe")
-        SZNotiManager.shareNoti().SZNotificationWith(hour: 18, minute: 17, title: "training", alertBody: "time to run", notiId: "PM")
+//        SZNotiManager.shareNoti().SZNotificationWith(hour: 22, minute: 36, title: "dinner", alertBody: "time to dinner", notiId: "qwe")
+//        SZNotiManager.shareNoti().SZNotificationWith(hour: 21, minute: 37, title: "training", alertBody: "time to run", notiId: "PM")
+        
+        SZNotiManager.shareNoti().SZLocalNotiWith(aleretTime: "23:28", alertBody: "time to sleep")
+        
+        SZNotiManager.shareNoti().SZLocalNotiWith(aleretTime: "23:29", alertBody: "quikly!")
         
     }
 

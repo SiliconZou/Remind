@@ -8,6 +8,7 @@
 
 import Foundation
 import UserNotifications
+import UIKit
 class SZNotiManager: NSObject , UNUserNotificationCenterDelegate{
     
     private static let manager:SZNotiManager = SZNotiManager()
@@ -27,6 +28,33 @@ class SZNotiManager: NSObject , UNUserNotificationCenterDelegate{
                 print("用户拒绝")
             }
         }
+    }
+    
+    func localNotiRequest() {
+        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings.init(types: [.alert,.badge,.sound], categories: nil))
+    }
+    
+    func SZLocalNotiWith(aleretTime:String?, alertBody:String) {
+        
+        let localNoti = UILocalNotification.init()
+        let df = DateFormatter.init()
+        df.date(from: "HH:mm")
+        df.timeZone = TimeZone.init(secondsFromGMT: 0)
+        
+        let date = df.date(from: aleretTime!)
+        localNoti.fireDate = date
+        
+        localNoti.timeZone = TimeZone.init(secondsFromGMT: 0)
+        
+        localNoti.alertBody = alertBody
+        
+        localNoti.applicationIconBadgeNumber = 1
+        
+        localNoti.soundName = UILocalNotificationDefaultSoundName
+        
+        localNoti.repeatInterval = NSCalendar.Unit.day
+        
+        UIApplication.shared.scheduleLocalNotification(localNoti)
     }
     
     func SZNotificationWith(hour:Int?, minute:Int?, title:String?, alertBody:String?, notiId:String?) {
