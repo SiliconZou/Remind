@@ -33,7 +33,8 @@ class SZNotiManager: NSObject , UNUserNotificationCenterDelegate{
     func localNotiRequest() {
         UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings.init(types: [.alert,.badge,.sound], categories: nil))
     }
-    
+
+
     func SZLocalNotiWith(aleretTime:String?, alertBody:String) {
         
         let localNoti = UILocalNotification.init()
@@ -78,9 +79,9 @@ class SZNotiManager: NSObject , UNUserNotificationCenterDelegate{
         
         notiContent.sound = UNNotificationSound.default()
         
-        var compoents = DateComponents.init()
+        var compoents = DateComponents()
         
-        compoents.timeZone = TimeZone.init(secondsFromGMT: 0)
+//        compoents.timeZone = TimeZone.init(secondsFromGMT: 0)
         
         compoents.hour = hour
         
